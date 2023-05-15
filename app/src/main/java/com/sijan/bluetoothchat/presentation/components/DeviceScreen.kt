@@ -18,14 +18,16 @@ import com.sijan.bluetoothchat.presentation.BluetoothUiState
 fun DeviceScreen(
     state: BluetoothUiState,
     onStartScan:() -> Unit,
-    onStopScan:() -> Unit
+    onStopScan:() -> Unit,
+    onStartServer: () -> Unit,
+    onDeviceClick: (BluetoothDevice) -> Unit
 ){
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
 
-        BluetoothDeviceList(scannedDevices = state.scannedDevices, pairedDevices =state.pairedDevices , onClick = {},
+        BluetoothDeviceList(scannedDevices = state.scannedDevices, pairedDevices =state.pairedDevices , onClick = onDeviceClick,
         modifier = Modifier
             .fillMaxWidth()
             .weight(1f))
@@ -37,6 +39,9 @@ fun DeviceScreen(
             }
             Button(onClick = onStopScan) {
                 Text(text = "Stop Scan")
+            }
+            Button(onClick = onStartServer) {
+                Text(text = "Start Server")
             }
         }
         
